@@ -91,6 +91,10 @@ public class ChatClient extends AbstractClient
     System.exit(0);
   }
 
+  /**
+   * This method is called when the client is listening for the server and the server shuts down.
+   * @param exception The exception thrown when the server does not respond.
+   */
   public void connectionException(Exception exception) {
     clientUI.display("Server has shut down. Terminating client.");
     quit();
