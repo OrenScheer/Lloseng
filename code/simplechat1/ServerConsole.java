@@ -34,11 +34,24 @@ public class ServerConsole implements ChatIF {
     server = new EchoServer(port, this);
   }
 
+  //Instance methods ************************************************
 
+  /**
+   * Overrides the display method of ChatIF.
+   * This method is not currently used since when the server UI
+   * displays a method, it displays the client info as well.
+   * The server instead displays the output in the handleMessageFromClient
+   * method in EchoServer.
+   * @param message The message to be displayed.
+   */
   public void display (String message) {
     System.out.println(message);
   }
 
+  /**
+   * This method waits for input from the console.  Once it is
+   * received, it sends it to the server's message handler.
+   */
   public void accept() {
     try
     {
