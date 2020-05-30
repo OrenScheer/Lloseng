@@ -93,6 +93,14 @@ public class ChatClient extends AbstractClient
             clientUI.display("Could not set port as client is currently connected.");
           }
         }
+        else if (commands[0].equals("#login")) {
+          if (!isConnected()) {
+            openConnection();
+          }
+          else {
+            clientUI.display("Client is already connected to the server!");
+          }
+        }
       }
       else {
         sendToServer(message);
