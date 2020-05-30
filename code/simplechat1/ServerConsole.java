@@ -16,6 +16,57 @@ public class ServerConsole implements ChatIF {
    * The default port to listen on.
    */
   final public static int DEFAULT_PORT = 5555;
+
+  //Instance variables **********************************************
+
+  /**
+   * The instance of the EchoServer associated with this ServerConsole.
+   */
+  EchoServer server;
+
+  //Constructors ****************************************************
+
+  /**
+   * Constructs an instance of the server console.
+   * @param port The port number to connect on.
+   */
+  public ServerConsole (int port) {
+    server = new EchoServer(port, this);
+  }
+
+
+  public void display (String message) {
+    System.out.println(message);
+  }
+
+  public void accept() {
+    try
+    {
+      BufferedReader fromConsole =
+        new BufferedReader(new InputStreamReader(System.in));
+      String message;
+
+      while (true)
+      {
+        message = fromConsole.readLine();
+        server.handleMessageFromServerUI(message);
+      }
+    }
+    catch (Exception ex)
+    {
+      System.out.println
+        ("Unexpected error while reading from console!");
+    }
+  }
+  //Class methods ***************************************************
+
+  /**
+   * This method is responsible for the creation of
+   * the server instance.
+   *
+   * @param args[0] The port number to listen on.  Defaults to 5555
+   *          if no argument is entered.
+   */
   public static void main(String[] args)
   {
     int port = 0; //Port to listen on
