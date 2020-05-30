@@ -101,6 +101,12 @@ public class ChatClient extends AbstractClient
             clientUI.display("Client is already connected to the server!");
           }
         }
+        else if (commands[0].equals("#gethost")) {
+          clientUI.display("Connected to host: " + getHost());
+        }
+        else if (commands[0].equals("#getport")) {
+          clientUI.display("Connected on port: " + getPort());
+        }
       }
       else {
         sendToServer(message);
