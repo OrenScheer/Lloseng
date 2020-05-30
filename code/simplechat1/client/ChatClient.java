@@ -100,6 +100,9 @@ public class ChatClient extends AbstractClient
     quit();
   }
 
+  /**
+   * This method is called when the connection to the server has been closed.
+   */
   protected void connectionClosed() {
     clientUI.display("The connection to the server has been closed.");
   }
