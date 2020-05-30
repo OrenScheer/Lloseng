@@ -76,6 +76,14 @@ public class ChatClient extends AbstractClient
         else if(commands[0].equals("#logoff")) {
           closeConnection();
         }
+        else if(commands[0].equals("#sethost")) {
+          if (!isConnected()) {
+            setHost(commands[1]);
+          }
+          else {
+            clientUI.display("Could not set host as client is currently connected.");
+          }
+        }
       }
       else {
         sendToServer(message);
