@@ -52,6 +52,17 @@ public class EchoServer extends AbstractServer
   }
 
   /**
+   * This method is called when data arrives from the UI.
+   * @param msg The data sent from the UI.
+   */
+  public void handleMessageFromServerUI(Object msg) {
+    if (msg == null) {
+      return;
+    }
+    sendToAllClients("SERVER MSG>" + msg);
+  }
+
+  /**
    * This method overrides the one in the superclass.  Called
    * when the server starts listening for connections.
    */
