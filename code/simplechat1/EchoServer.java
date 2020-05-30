@@ -94,6 +94,14 @@ public class EchoServer extends AbstractServer
       else if (commands[0].equals("#getport")) {
         serverUI.display("The port number is: " + getPort());
       }
+      else if (commands[0].equals("#start")) {
+        try {
+          listen();
+        }
+        catch (IOException e) {
+          serverUI.display("Unable to start listening.");
+        }
+      }
     }
     else {
       sendToAllClients("SERVER MSG>" + message);
