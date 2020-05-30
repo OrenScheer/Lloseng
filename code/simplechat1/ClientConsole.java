@@ -40,12 +40,13 @@ public class ClientConsole implements ChatIF
    *
    * @param host The host to connect to.
    * @param port The port to connect on.
+   * @param loginID The login ID of the client.
    */
-  public ClientConsole(String host, int port)
+  public ClientConsole(String host, int port, String loginID)
   {
     try
     {
-      client= new ChatClient(host, port, this);
+      client= new ChatClient(host, port, loginID, this);
     }
     catch(IOException exception)
     {
@@ -100,32 +101,38 @@ public class ClientConsole implements ChatIF
   /**
    * This method is responsible for the creation of the Client UI.
    *
-   * @param args[0] The host to connect to.
-   * @param args[1] The port to connect to.
+   * @param args[0] The client login id.
+   * @param args[1] The host to connect to.
+   * @param args[2] The port to connect to.
    */
   public static void main(String[] args)
   {
     String host = "localhost"; // Default host name
     int port = DEFAULT_PORT;  // Default host number
-    if (args.length == 2) { // If both host and port are input
+    if (args.length == 0) {
+      System.out.println("A login id is necessary. Please re-run with a command line argument that will be the login ID.");
+      System.exit(1);
+    }
+    String loginID = args[0];
+    if (args.length == 3) { // If both host and port are input
       try {
-        host = args[0];
-        port = Integer.parseInt(args[1]);
+        host = args[1];
+        port = Integer.parseInt(args[2]);
       }
       catch (NumberFormatException e) { // In case they're input in reverse order
-        host = args[1];
-        port = Integer.parseInt(args[0]);
+        host = args[2];
+        port = Integer.parseInt(args[1]);
       }
     }
-    else if (args.length == 1) { // If only one of host/port are present
+    else if (args.length == 2) { // If only one of host/port are present
       try { // First see if it's a port
-        port = Integer.parseInt(args[0]);
+        port = Integer.parseInt(args[1]);
       }
       catch (NumberFormatException e) { // Otherwise it's a host
-        host = args[0];
+        host = args[1];
       }
     }
-    ClientConsole chat= new ClientConsole(host, port);
+    ClientConsole chat = new ClientConsole(host, port, loginID);
     chat.accept();  //Wait for console data
   }
 }
