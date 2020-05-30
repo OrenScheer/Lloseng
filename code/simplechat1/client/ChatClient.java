@@ -70,6 +70,7 @@ public class ChatClient extends AbstractClient
     {
       if (message.charAt(0) == '#') {
         String[] commands = message.split(" ");
+        commands[0] = commands[0].toLowerCase();
         if(commands[0].equals("#quit")) {
           quit();
         }
