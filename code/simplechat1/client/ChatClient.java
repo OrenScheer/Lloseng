@@ -84,6 +84,14 @@ public class ChatClient extends AbstractClient
             clientUI.display("Could not set host as client is currently connected.");
           }
         }
+        else if (commands[0].equals("#setport")) {
+          if (!isConnected()) {
+            setPort(Integer.parseInt(commands[1]));
+          }
+          else {
+            clientUI.display("Could not set port as client is currently connected.");
+          }
+        }
       }
       else {
         sendToServer(message);
