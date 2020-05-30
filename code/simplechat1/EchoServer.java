@@ -74,6 +74,15 @@ public class EchoServer extends AbstractServer
       if (commands[0].equals("#stop")) {
         stopListening();
       }
+      if (commands[0].equals("#close")) {
+        stopListening();
+        try {
+          close();
+        }
+        catch (IOException e) {
+          serverUI.display("Unable to close existing connections.");
+        }
+      }
     }
     else {
       sendToAllClients("SERVER MSG>" + message);
