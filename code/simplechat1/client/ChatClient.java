@@ -99,5 +99,9 @@ public class ChatClient extends AbstractClient
     clientUI.display("Server has shut down. Terminating client.");
     quit();
   }
+
+  protected void connectionClosed() {
+    clientUI.display("The connection to the server has been closed.");
+  }
 }
 //End of ChatClient class
