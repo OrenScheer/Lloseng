@@ -71,10 +71,10 @@ public class EchoServer extends AbstractServer
           serverUI.display("Unable to quit.");
         }
       }
-      if (commands[0].equals("#stop")) {
+      else if (commands[0].equals("#stop")) {
         stopListening();
       }
-      if (commands[0].equals("#close")) {
+      else if (commands[0].equals("#close")) {
         stopListening();
         try {
           close();
@@ -82,6 +82,17 @@ public class EchoServer extends AbstractServer
         catch (IOException e) {
           serverUI.display("Unable to close existing connections.");
         }
+      }
+      else if (commands[0].equals("#setport")) {
+        if (!isListening() && getNumberOfClients() == 0) {
+          setPort(Integer.parseInt(commands[1]));
+        }
+        else {
+          serverUI.display("Could not set port as server is not closed.");
+        }
+      }
+      else if (commands[0].equals("#getport")) {
+        serverUI.display("The port number is: " + getPort());
       }
     }
     else {
