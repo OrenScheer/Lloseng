@@ -4,6 +4,7 @@
 
 import java.io.*;
 import ocsf.server.*;
+import common.*;
 
 /**
  * This class overrides some of the methods in the abstract
@@ -17,12 +18,9 @@ import ocsf.server.*;
  */
 public class EchoServer extends AbstractServer
 {
-  //Class variables *************************************************
+  //Instance variables **********************************************
 
-  /**
-   * The default port to listen on.
-   */
-  final public static int DEFAULT_PORT = 5555;
+  ChatIF serverUI;
 
   //Constructors ****************************************************
 
@@ -31,9 +29,10 @@ public class EchoServer extends AbstractServer
    *
    * @param port The port number to connect on.
    */
-  public EchoServer(int port)
+  public EchoServer(int port, ChatIF serverUI)
   {
     super(port);
+    this.serverUI = serverUI;
   }
 
 
