@@ -63,7 +63,6 @@ public class EchoServer extends AbstractServer
       String[] commands = message.split(" ");
       commands[0] = commands[0].toLowerCase(); // Case insensitive
       if (commands[0].equals("#quit")) {
-        stopListening();
         try {
           close();
           System.exit(0);
@@ -71,6 +70,9 @@ public class EchoServer extends AbstractServer
         catch (IOException e) {
           serverUI.display("Unable to quit.");
         }
+      }
+      if (commands[0].equals("#stop")) {
+        stopListening();
       }
     }
     else {
