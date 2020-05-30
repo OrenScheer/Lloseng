@@ -47,7 +47,7 @@ public class EchoServer extends AbstractServer
   public void handleMessageFromClient
     (Object msg, ConnectionToClient client)
   {
-    System.out.println("Message received: " + msg + " from " + client);
+    serverUI.display("Message received: " + msg + " from " + client);
     this.sendToAllClients(msg);
   }
 
@@ -69,7 +69,7 @@ public class EchoServer extends AbstractServer
           System.exit(0);
         }
         catch (IOException e) {
-          System.out.println("Unable to quit.");
+          serverUI.display("Unable to quit.");
         }
       }
     }
@@ -84,8 +84,7 @@ public class EchoServer extends AbstractServer
    */
   protected void serverStarted()
   {
-    System.out.println
-      ("Server listening for connections on port " + getPort());
+    serverUI.display("Server listening for connections on port " + getPort());
   }
 
   /**
@@ -94,8 +93,7 @@ public class EchoServer extends AbstractServer
    */
   protected void serverStopped()
   {
-    System.out.println
-      ("Server has stopped listening for connections.");
+    serverUI.display("Server has stopped listening for connections.");
   }
 
   /**
@@ -104,7 +102,7 @@ public class EchoServer extends AbstractServer
    * @param client the connection with the client.
    */
   protected void clientConnected(ConnectionToClient client) {
-    System.out.println("Client at " + client + " has connected.");
+    serverUI.display("Client at " + client + " has connected.");
   }
 
   /**
@@ -113,7 +111,7 @@ public class EchoServer extends AbstractServer
    * @param client the connection with the client.
    */
   synchronized protected void clientDisconnected(ConnectionToClient client) {
-    System.out.println("Client at " + client + " has disconnected.");
+    serverUI.display("Client at " + client + " has disconnected.");
   }
 
   /**
@@ -122,7 +120,7 @@ public class EchoServer extends AbstractServer
    * @param client the connection with the client.
    */
   synchronized protected void clientException(ConnectionToClient client, Throwable exception) {
-    System.out.println("A client has unexpectedly disconnected: " + exception);
+    serverUI.display("A client has unexpectedly disconnected: " + exception);
   }
 }
 

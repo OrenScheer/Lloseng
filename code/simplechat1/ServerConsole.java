@@ -38,10 +38,7 @@ public class ServerConsole implements ChatIF {
 
   /**
    * Overrides the display method of ChatIF.
-   * This method is not currently used since when the server UI
-   * displays a method, it displays the client info as well.
-   * The server instead displays the output in the handleMessageFromClient
-   * method in EchoServer.
+   * Prints a message to the console.
    * @param message The message to be displayed.
    */
   public void display (String message) {
