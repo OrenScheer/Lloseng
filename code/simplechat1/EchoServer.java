@@ -53,13 +53,29 @@ public class EchoServer extends AbstractServer
 
   /**
    * This method is called when data arrives from the UI.
-   * @param msg The data sent from the UI.
+   * @param message The data sent from the UI.
    */
-  public void handleMessageFromServerUI(Object msg) {
-    if (msg == null) {
-      return;
+  public void handleMessageFromServerUI(String message) {
+    if (message == null) {
+      return; // If server quits by Ctrl + C, avoid sending "null" to clients
     }
-    sendToAllClients("SERVER MSG>" + msg);
+    if (message.charAt(0) == '#') { // Commands
+      String[] commands = message.split(" ");
+      commands[0] = commands[0].toLowerCase(); // Case insensitive
+      if (commands[0].equals("#quit")) {
+        stopListening();
+        try {
+          close();
+          System.exit(0);
+        }
+        catch (IOException e) {
+          System.out.println("Unable to quit.");
+        }
+      }
+    }
+    else {
+      sendToAllClients("SERVER MSG>" + message);
+    }
   }
 
   /**
