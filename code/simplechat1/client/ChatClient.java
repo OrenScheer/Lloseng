@@ -68,7 +68,15 @@ public class ChatClient extends AbstractClient
   {
     try
     {
-      sendToServer(message);
+      if (message.charAt(0) == '#') {
+        String[] commands = message.split(" ");
+        if(commands[0].equals("#quit")) {
+          quit();
+        }
+      }
+      else {
+        sendToServer(message);
+      }
     }
     catch(IOException e)
     {
