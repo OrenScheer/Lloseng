@@ -73,6 +73,9 @@ public class ChatClient extends AbstractClient
         if(commands[0].equals("#quit")) {
           quit();
         }
+        else if(commands[0].equals("#logoff")) {
+          closeConnection();
+        }
       }
       else {
         sendToServer(message);
