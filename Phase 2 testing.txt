@@ -218,7 +218,7 @@ Client at 192.168.1.131 (192.168.1.131) has connected.
 Message received: #login VMusername from 192.168.1.131 (192.168.1.131)
 VMusername has logged on.
 
-^Cxubuntuvm@xubuntuvm-VirtualBox:~/Documents/SimpleChat/Lloseng/code/simplechat1$ java -classpath '../../code:.' ClientConsole VMusername 192.168.1.102 1234
+xubuntuvm@xubuntuvm-VirtualBox:~/Documents/SimpleChat/Lloseng/code/simplechat1$ java -classpath '../../code:.' ClientConsole VMusername 192.168.1.102 1234
 > VMusername has logged on.
 
 ============================
@@ -241,6 +241,7 @@ Server has stopped listening for connections.
 username723 has disconnected.
 VMusername has disconnected.
 #setport 1234
+Port set to: 1234
 #start
 Server listening for connections on port 1234
 Client at 127.0.0.1 (127.0.0.1) has connected.
@@ -277,7 +278,7 @@ Test after reconnect
 > SERVER MSG>Test after reconnect
 > Abnormal termination of connection.
 
-^Cxubuntuvm@xubuntuvm-VirtualBox:~/Documents/SimpleChat/Lloseng/code/simplechat1$ java -classpath '../../code:.' ClientConsole VMusername 192.168.1.102
+xubuntuvm@xubuntuvm-VirtualBox:~/Documents/SimpleChat/Lloseng/code/simplechat1$ java -classpath '../../code:.' ClientConsole VMusername 192.168.1.102
 > VMusername has logged on.
 > username723: Test from client on same machine as server
 Test from client on Xubuntu virtual machine
@@ -294,5 +295,72 @@ Test after reconnect
 > SERVER MSG>Test after reconnect
 > Abnormal termination of connection.
 
+============================
+Testcase 2016
 
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+Message received: Test to server on same computer from username723
+username723 has disconnected.
+
+xubuntuvm@xubuntuvm-VirtualBox:~/Documents/SimpleChat/Lloseng/code/simplechat1$ java -classpath '../../code:.' ServerConsole
+Server listening for connections on port 5555
+Client at 192.168.1.102 (192.168.1.102) has connected.
+Message received: #login username723 from 192.168.1.102 (192.168.1.102)
+username723 has logged on.
+Message received: Test to server on VM from username723
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+Test to server on same computer
+> username723: Test to server on same computer
+#logoff
+> Any open connection to the server has been closed.
+#sethost 192.168.1.131
+> Host set to: 192.168.1.131
+#login username723
+> username723 has logged on.
+Test to server on VM
+> username723: Test to server on VM
+
+============================
+Testcase 2017
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login Falcon9 from 127.0.0.1 (127.0.0.1)
+Falcon9 has logged on.
+Client at 192.168.1.131 (192.168.1.131) has connected.
+Message received: #login VMusername from 192.168.1.131 (192.168.1.131)
+VMusername has logged on.
+username723 has disconnected.
+Falcon9 has disconnected.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+> Falcon9 has logged on.
+> VMusername has logged on.
+#quit
+> Any open connection to the server has been closed.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole Falcon9
+> Falcon9 has logged on.
+> VMusername has logged on.
+> username723 has disconnected.
+#logoff
+> Any open connection to the server has been closed.
+
+xubuntuvm@xubuntuvm-VirtualBox:~/Documents/SimpleChat/Lloseng/code/simplechat1$ java -classpath '../../code:.' ClientConsole VMusername 192.168.1.102
+> VMusername has logged on.
+> username723 has disconnected.
+> Falcon9 has disconnected.
 
