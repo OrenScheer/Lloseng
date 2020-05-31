@@ -146,6 +146,7 @@ public class EchoServer extends AbstractServer
   protected void serverStopped()
   {
     serverUI.display("Server has stopped listening for connections.");
+    sendToAllClients("WARNING - Server has stopped listening for connections.");
   }
 
   /**
