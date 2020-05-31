@@ -175,8 +175,13 @@ public class EchoServer extends AbstractServer
    * @param client the connection with the client.
    */
   synchronized protected void clientException(ConnectionToClient client, Throwable exception) {
-    serverUI.display("A client has unexpectedly disconnected: " + exception);
-    client.setInfo("firstMessageReceived", false);
+    if (exception instanceof EOFException) { // Workaround since EOFException occurs when client uses #quit
+      clientDisconnected(client);
+    }
+    else {
+      serverUI.display(client.getInfo("loginID") + " has unexpectedly disconnected: " + exception);
+      client.setInfo("firstMessageReceived", false);
+    }
   }
 }
 
