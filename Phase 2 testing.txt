@@ -1,0 +1,22 @@
+Name: Oren Scheer
+Student number: 300113513
+Email address: osche018@uottawa.ca
+
+===========================
+Testcase 2001
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. EchoServer
+Error: Main method not found in class EchoServer, please define the main method as:
+   public static void main(String[] args)
+or a JavaFX application class must extend javafx.application.Application
+
+
+Comments
+---------------------------
+Main has been moved to ServerConsole so this does not work as the testcase expects. When EchoServer is
+replaced with ServerConsole in the command line, it works as expected:
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+
+===========================
