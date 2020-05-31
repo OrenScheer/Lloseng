@@ -107,6 +107,7 @@ public class EchoServer extends AbstractServer
       else if (commands[0].equals("#setport")) {
         if (!isListening() && getNumberOfClients() == 0) {
           setPort(Integer.parseInt(commands[1]));
+          serverUI.display("Port set to: " + getPort());
         }
         else {
           serverUI.display("Could not set port as server is not closed.");
