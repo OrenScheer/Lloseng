@@ -51,6 +51,7 @@ public class ChatClient extends AbstractClient
     this.clientUI = clientUI;
     this.loginID = loginID;
     openConnection();
+    sendLoginToServer();
   }
 
 
@@ -103,6 +104,7 @@ public class ChatClient extends AbstractClient
         else if (commands[0].equals("#login")) {
           if (!isConnected()) {
             openConnection();
+            sendLoginToServer();
           }
           else {
             clientUI.display("Client is already connected to the server!");
@@ -154,6 +156,19 @@ public class ChatClient extends AbstractClient
    */
   protected void connectionClosed() {
     clientUI.display("The connection to the server has been closed.");
+  }
+
+  /**
+   * This method, called when the client establishes a new connection to
+   * the server, sends its login ID to the server.
+   */
+  private void sendLoginToServer() {
+    try {
+      sendToServer("#login " + loginID);
+    }
+    catch (IOException e) {
+      clientUI.display("could not send login to server.");
+    }
   }
 }
 //End of ChatClient class
