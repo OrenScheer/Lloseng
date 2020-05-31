@@ -103,3 +103,44 @@ Testing launch
 > Falcon9: Testing launch
 > SERVER MSG>Testing message from server
 
+
+===========================
+Testcase 2007
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+#quit
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>
+
+============================
+Testcase 2008
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+#stop
+Server has stopped listening for connections.
+Message received: Test data echoing from username723
+#start
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login Falcon9 from 127.0.0.1 (127.0.0.1)
+Falcon9 has logged on.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+> WARNING - Server has stopped listening for connections.
+Test data echoing
+> username723: Test data echoing
+> Falcon9 has logged on.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole Falcon9
+> Falcon9 has logged on.
+
+Comments
+---------------------------
+Note that Falcon9 attempts to connect between the server's #stop and #start commands but only manages
+to connect after the #start command.
