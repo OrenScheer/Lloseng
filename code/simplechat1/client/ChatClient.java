@@ -50,8 +50,11 @@ public class ChatClient extends AbstractClient
     super(host, port); //Call the superclass constructor
     this.clientUI = clientUI;
     this.loginID = loginID;
-    openConnection();
-    sendLoginToServer();
+    try { // ChatClient can still be created if server is not open and listening
+        openConnection();
+        sendLoginToServer();
+    }
+    catch (IOException e) {} // If connection fails, console must #login to connect
   }
 
 
