@@ -20,3 +20,86 @@ C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..
 Server listening for connections on port 5555
 
 ===========================
+Testcase 2002
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole
+ERROR - No login ID specified.  Connection aborted.
+
+===========================
+Testcase 2003
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+Error: Can't setup connection! Terminating client.
+
+Comments
+---------------------------
+A design choice has been made to not allow the user to login again after a failed initial login. As 
+all data processing is done by ChatClient, it would be impossible to attempt to recreate (since the 
+construction failed) the instance of ChatClient associated with a ClientConsole without processing 
+the #login command from a ClientConsole method. This would violate the separation fo the UI and the 
+other client methods. A user can simply rerun the program from the terminal once the server is up 
+and running, which is just as easy as running a #login command.
+
+===========================
+Testcase 2004
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+
+Comments
+---------------------------
+The clientConnected() hook method displays info about the new connected client instead of saying that
+a new client is attempting to connect to the server.
+
+===========================
+Testcase 2005
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+Message received: Test123! from username723
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+Test123!
+> username723: Test123!
+
+===========================
+Testcase 2006
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login Falcon9 from 127.0.0.1 (127.0.0.1)
+Falcon9 has logged on.
+Message received: Testing from username723
+Message received: Testing launch from Falcon9
+Testing message from server
+SERVER MSG>Testing message from server
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+> Falcon9 has logged on.
+Testing
+> username723: Testing
+> Falcon9: Testing launch
+> SERVER MSG>Testing message from server
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole Falcon9
+> Falcon9 has logged on.
+> username723: Testing
+Testing launch
+> Falcon9: Testing launch
+> SERVER MSG>Testing message from server
+
