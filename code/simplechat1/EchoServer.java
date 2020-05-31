@@ -53,7 +53,7 @@ public class EchoServer extends AbstractServer
     }
     else  {
       serverUI.display("Message received: " + msg + " from " + client);
-      sendToAllClients(msg);
+      sendToAllClients(client.getInfo("loginID") + ": " + msg);
     }
   }
 
