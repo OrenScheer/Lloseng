@@ -45,9 +45,9 @@ public class EchoServer extends AbstractServer
    * @param client The connection from which the message originated.
    */
   public void handleMessageFromClient (Object msg, ConnectionToClient client) {
-    String[] parts = msg.split(" ");
+    String[] parts = ((String)msg).split(" ");
     if (parts[0].equals("#login")) {
-      serverUI.display(msg);
+      serverUI.display((String) msg);
       sendToAllClients(msg);
     }
     else  {
