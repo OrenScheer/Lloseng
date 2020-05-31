@@ -214,13 +214,85 @@ Testcase 2014
 
 C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole 1234
 Server listening for connections on port 1234
-Client at 127.0.0.1 (127.0.0.1) has connected.
-Message received: #login username723 from 127.0.0.1 (127.0.0.1)
-username723 has logged on.
+Client at 192.168.1.131 (192.168.1.131) has connected.
+Message received: #login VMusername from 192.168.1.131 (192.168.1.131)
+VMusername has logged on.
 
-C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723 localhost 1234
-> username723 has logged on.
+^Cxubuntuvm@xubuntuvm-VirtualBox:~/Documents/SimpleChat/Lloseng/code/simplechat1$ java -classpath '../../code:.' ClientConsole VMusername 192.168.1.102 1234
+> VMusername has logged on.
 
 ============================
 Testcase 2015
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+Client at 192.168.1.131 (192.168.1.131) has connected.
+Message received: #login VMusername from 192.168.1.131 (192.168.1.131)
+VMusername has logged on.
+Message received: Test from client on same machine as server from username723
+Message received: Test from client on Xubuntu virtual machine from VMusername
+Test from server console
+SERVER MSG>Test from server console
+#close
+Server has stopped listening for connections.
+username723 has disconnected.
+VMusername has disconnected.
+#setport 1234
+#start
+Server listening for connections on port 1234
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+Client at 192.168.1.131 (192.168.1.131) has connected.
+Message received: #login VMusername from 192.168.1.131 (192.168.1.131)
+VMusername has logged on.
+Message received: Test after reconnect from username723
+Message received: Test after reconnect from VMusername
+Test after reconnect
+SERVER MSG>Test after reconnect
+#quit
+Server has stopped listening for connections.
+username723 has disconnected.
+VMusername has disconnected.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+> VMusername has logged on.
+Test from client on same machine as server
+> username723: Test from client on same machine as server
+> VMusername: Test from client on Xubuntu virtual machine
+> SERVER MSG>Test from server console
+> Abnormal termination of connection.
+#setport 1234
+> Port set to: 1234
+#login username723
+> username723 has logged on.
+> VMusername has logged on.
+Test after reconnect
+> username723: Test after reconnect
+> VMusername: Test after reconnect
+> SERVER MSG>Test after reconnect
+> Abnormal termination of connection.
+
+^Cxubuntuvm@xubuntuvm-VirtualBox:~/Documents/SimpleChat/Lloseng/code/simplechat1$ java -classpath '../../code:.' ClientConsole VMusername 192.168.1.102
+> VMusername has logged on.
+> username723: Test from client on same machine as server
+Test from client on Xubuntu virtual machine
+> VMusername: Test from client on Xubuntu virtual machine
+> SERVER MSG>Test from server console
+> Abnormal termination of connection.
+#setport 1234
+> Port set to: 1234
+#login VMusername
+> VMusername has logged on.
+> username723: Test after reconnect
+Test after reconnect
+> VMusername: Test after reconnect
+> SERVER MSG>Test after reconnect
+> Abnormal termination of connection.
+
+
 
