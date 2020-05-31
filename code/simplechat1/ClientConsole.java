@@ -110,7 +110,7 @@ public class ClientConsole implements ChatIF
     String host = "localhost"; // Default host name
     int port = DEFAULT_PORT;  // Default host number
     if (args.length == 0) {
-      System.out.println("A login id is necessary. Please re-run with a command line argument that will be the login ID.");
+      System.out.println("ERROR - No login ID specified.  Connection aborted.");
       System.exit(1);
     }
     String loginID = args[0];
