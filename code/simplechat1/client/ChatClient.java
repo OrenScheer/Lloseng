@@ -45,7 +45,6 @@ public class ChatClient extends AbstractClient
    */
 
   public ChatClient(String host, int port, String loginID, ChatIF clientUI)
-    throws IOException
   {
     super(host, port); //Call the superclass constructor
     this.clientUI = clientUI;
@@ -54,7 +53,9 @@ public class ChatClient extends AbstractClient
         openConnection();
         sendLoginToServer();
     }
-    catch (IOException e) {} // If connection fails, console must #login to connect
+    catch (IOException e) {
+      this.clientUI.display("Cannot open connection. Awaiting command.");
+    } // If connection fails, console must #login to connect
   }
 
 

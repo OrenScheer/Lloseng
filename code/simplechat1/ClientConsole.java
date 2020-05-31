@@ -44,16 +44,8 @@ public class ClientConsole implements ChatIF
    */
   public ClientConsole(String host, int port, String loginID)
   {
-    try
-    {
-      client= new ChatClient(host, port, loginID, this);
-    }
-    catch(IOException exception)
-    {
-      System.out.println("Error: Can't setup connection!"
-                + " Terminating client.");
-      System.exit(1);
-    }
+      client= new ChatClient(host, port, loginID, this); // Exception is now caught in ChatClient constructor
+
   }
 
 
