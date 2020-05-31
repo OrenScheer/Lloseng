@@ -46,21 +46,21 @@ public class EchoServer extends AbstractServer
    */
   public void handleMessageFromClient (Object msg, ConnectionToClient client) {
     String[] parts = ((String)msg).split(" ");
-    if (parts[0].equals("#login") && (client.getInfo("firstMessageReceived") == null || ((boolean) client.getInfo("firstMessageReceived")) == false)) {
+    if (parts[0].equals("#login") && (client.getInfo("firstMessageReceived") == null || ((boolean) client.getInfo("firstMessageReceived")) == false)) { // Login message and first message
       serverUI.display("Message received: " + msg + " from " + client);
       client.setInfo("loginID", ((String)msg).substring(7));
       client.setInfo("firstMessageReceived", true);
       serverUI.display(client.getInfo("loginID") + " has logged on.");
       sendToAllClients(client.getInfo("loginID") + " has logged on.");
     }
-    else if (parts[0].equals("#login")) {
+    else if (parts[0].equals("#login")) { // If attempting to login after first message
       try {
         client.sendToClient("Already connected, cannot login again.");
       }
       catch (IOException e) {}
     }
     else {
-      if (client.getInfo("firstMessageReceived") == null || ((boolean) client.getInfo("firstMessageReceived")) == false) {
+      if (client.getInfo("firstMessageReceived") == null || ((boolean) client.getInfo("firstMessageReceived")) == false) { // If no first login message
         try {
           client.sendToClient("No login found. Terminating connection.");
           client.close();
