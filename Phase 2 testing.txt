@@ -1,0 +1,365 @@
+Name: Oren Scheer
+Student number: 300113513
+Email address: osche018@uottawa.ca
+
+===========================
+Testcase 2001
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. EchoServer
+Error: Main method not found in class EchoServer, please define the main method as:
+   public static void main(String[] args)
+or a JavaFX application class must extend javafx.application.Application
+
+
+Comments
+---------------------------
+Main has been moved to ServerConsole so this does not work as the testcase expects. When EchoServer is
+replaced with ServerConsole in the command line, it works as expected:
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+
+===========================
+Testcase 2002
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole
+ERROR - No login ID specified.  Connection aborted.
+
+===========================
+Testcase 2003
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> Cannot open connection. Awaiting command.
+
+===========================
+Testcase 2004
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+
+Comments
+---------------------------
+The clientConnected() hook method displays info about the new connected client instead of saying that
+a new client is attempting to connect to the server.
+
+===========================
+Testcase 2005
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+Message received: Test123! from username723
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+Test123!
+> username723: Test123!
+
+===========================
+Testcase 2006
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login Falcon9 from 127.0.0.1 (127.0.0.1)
+Falcon9 has logged on.
+Message received: Testing from username723
+Message received: Testing launch from Falcon9
+Testing message from server
+SERVER MSG>Testing message from server
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+> Falcon9 has logged on.
+Testing
+> username723: Testing
+> Falcon9: Testing launch
+> SERVER MSG>Testing message from server
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole Falcon9
+> Falcon9 has logged on.
+> username723: Testing
+Testing launch
+> Falcon9: Testing launch
+> SERVER MSG>Testing message from server
+
+
+===========================
+Testcase 2007
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+#quit
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>
+
+============================
+Testcase 2008
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+#stop
+Server has stopped listening for connections.
+Message received: Test data echoing from username723
+#start
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login Falcon9 from 127.0.0.1 (127.0.0.1)
+Falcon9 has logged on.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+> WARNING - Server has stopped listening for connections.
+Test data echoing
+> username723: Test data echoing
+> Falcon9 has logged on.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole Falcon9
+> Falcon9 has logged on.
+
+Comments
+---------------------------
+Note that Falcon9 attempts to connect between the server's #stop and #start commands but only manages
+to connect after the #start command.
+
+============================
+Testcase 2009 (1)
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+#stop
+Server has stopped listening for connections.
+#close
+username723 has disconnected.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+> WARNING - Server has stopped listening for connections.
+> Abnormal termination of connection.
+
+============================
+Testcase 2009 (2)
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+#close
+Server has stopped listening for connections.
+username723 has disconnected.
+#start
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+> Abnormal termination of connection.
+#login
+> username723 has logged on.
+
+============================
+Testcase 2010
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> Cannot open connection. Awaiting command.
+#quit
+> Any open connection to the server has been closed.
+
+============================
+Testcase 2011
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+#logoff
+> Any open connection to the server has been closed.
+
+============================
+Testcase 2012
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> Cannot open connection. Awaiting command.
+#sethost fakeComputerName
+> Host set to: fakeComputerName
+#setport 1234
+> Port set to: 1234
+
+============================
+Testcase 2013
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole 1234
+Server listening for connections on port 1234
+
+============================
+Testcase 2014
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole 1234
+Server listening for connections on port 1234
+Client at 192.168.1.131 (192.168.1.131) has connected.
+Message received: #login VMusername from 192.168.1.131 (192.168.1.131)
+VMusername has logged on.
+
+xubuntuvm@xubuntuvm-VirtualBox:~/Documents/SimpleChat/Lloseng/code/simplechat1$ java -classpath '../../code:.' ClientConsole VMusername 192.168.1.102 1234
+> VMusername has logged on.
+
+============================
+Testcase 2015
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+Client at 192.168.1.131 (192.168.1.131) has connected.
+Message received: #login VMusername from 192.168.1.131 (192.168.1.131)
+VMusername has logged on.
+Message received: Test from client on same machine as server from username723
+Message received: Test from client on Xubuntu virtual machine from VMusername
+Test from server console
+SERVER MSG>Test from server console
+#close
+Server has stopped listening for connections.
+username723 has disconnected.
+VMusername has disconnected.
+#setport 1234
+Port set to: 1234
+#start
+Server listening for connections on port 1234
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+Client at 192.168.1.131 (192.168.1.131) has connected.
+Message received: #login VMusername from 192.168.1.131 (192.168.1.131)
+VMusername has logged on.
+Message received: Test after reconnect from username723
+Message received: Test after reconnect from VMusername
+Test after reconnect
+SERVER MSG>Test after reconnect
+#quit
+Server has stopped listening for connections.
+username723 has disconnected.
+VMusername has disconnected.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+> VMusername has logged on.
+Test from client on same machine as server
+> username723: Test from client on same machine as server
+> VMusername: Test from client on Xubuntu virtual machine
+> SERVER MSG>Test from server console
+> Abnormal termination of connection.
+#setport 1234
+> Port set to: 1234
+#login username723
+> username723 has logged on.
+> VMusername has logged on.
+Test after reconnect
+> username723: Test after reconnect
+> VMusername: Test after reconnect
+> SERVER MSG>Test after reconnect
+> Abnormal termination of connection.
+
+xubuntuvm@xubuntuvm-VirtualBox:~/Documents/SimpleChat/Lloseng/code/simplechat1$ java -classpath '../../code:.' ClientConsole VMusername 192.168.1.102
+> VMusername has logged on.
+> username723: Test from client on same machine as server
+Test from client on Xubuntu virtual machine
+> VMusername: Test from client on Xubuntu virtual machine
+> SERVER MSG>Test from server console
+> Abnormal termination of connection.
+#setport 1234
+> Port set to: 1234
+#login VMusername
+> VMusername has logged on.
+> username723: Test after reconnect
+Test after reconnect
+> VMusername: Test after reconnect
+> SERVER MSG>Test after reconnect
+> Abnormal termination of connection.
+
+============================
+Testcase 2016
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+Message received: Test to server on same computer from username723
+username723 has disconnected.
+
+xubuntuvm@xubuntuvm-VirtualBox:~/Documents/SimpleChat/Lloseng/code/simplechat1$ java -classpath '../../code:.' ServerConsole
+Server listening for connections on port 5555
+Client at 192.168.1.102 (192.168.1.102) has connected.
+Message received: #login username723 from 192.168.1.102 (192.168.1.102)
+username723 has logged on.
+Message received: Test to server on VM from username723
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+Test to server on same computer
+> username723: Test to server on same computer
+#logoff
+> Any open connection to the server has been closed.
+#sethost 192.168.1.131
+> Host set to: 192.168.1.131
+#login username723
+> username723 has logged on.
+Test to server on VM
+> username723: Test to server on VM
+
+============================
+Testcase 2017
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ServerConsole
+Server listening for connections on port 5555
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login username723 from 127.0.0.1 (127.0.0.1)
+username723 has logged on.
+Client at 127.0.0.1 (127.0.0.1) has connected.
+Message received: #login Falcon9 from 127.0.0.1 (127.0.0.1)
+Falcon9 has logged on.
+Client at 192.168.1.131 (192.168.1.131) has connected.
+Message received: #login VMusername from 192.168.1.131 (192.168.1.131)
+VMusername has logged on.
+username723 has disconnected.
+Falcon9 has disconnected.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole username723
+> username723 has logged on.
+> Falcon9 has logged on.
+> VMusername has logged on.
+#quit
+> Any open connection to the server has been closed.
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>
+
+C:\Users\orenr\Documents\SEG 2105\Lloseng\code\simplechat1>java -classpath ..\..\code;. ClientConsole Falcon9
+> Falcon9 has logged on.
+> VMusername has logged on.
+> username723 has disconnected.
+#logoff
+> Any open connection to the server has been closed.
+
+xubuntuvm@xubuntuvm-VirtualBox:~/Documents/SimpleChat/Lloseng/code/simplechat1$ java -classpath '../../code:.' ClientConsole VMusername 192.168.1.102
+> VMusername has logged on.
+> username723 has disconnected.
+> Falcon9 has disconnected.
