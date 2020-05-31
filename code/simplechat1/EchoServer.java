@@ -47,10 +47,11 @@ public class EchoServer extends AbstractServer
   public void handleMessageFromClient (Object msg, ConnectionToClient client) {
     String[] parts = ((String)msg).split(" ");
     if (parts[0].equals("#login") && (client.getInfo("firstMessageReceived") == null || ((boolean) client.getInfo("firstMessageReceived")) == false)) {
-      serverUI.display((String) msg);
-      client.setInfo("loginID", ((String)msg).substring(7, ((String)msg).length() - 1));
+      serverUI.display("Message received: " + msg + " from " + client);
+      client.setInfo("loginID", ((String)msg).substring(7));
       client.setInfo("firstMessageReceived", true);
-      sendToAllClients(msg);
+      serverUI.display(client.getInfo("loginID") + " has logged on.");
+      sendToAllClients(client.getInfo("loginID") + " has logged on.");
     }
     else if (parts[0].equals("#login")) {
       try {
@@ -66,7 +67,7 @@ public class EchoServer extends AbstractServer
         }
         catch (IOException e) {}
       }
-      serverUI.display("Message received: " + msg + " from " + client);
+      serverUI.display("Message received: " + msg + " from " + client.getInfo("loginID"));
       sendToAllClients(client.getInfo("loginID") + ": " + msg);
     }
   }
@@ -124,6 +125,7 @@ public class EchoServer extends AbstractServer
       }
     }
     else {
+      serverUI.display("SERVER MSG>" + message);
       sendToAllClients("SERVER MSG>" + message);
     }
   }
