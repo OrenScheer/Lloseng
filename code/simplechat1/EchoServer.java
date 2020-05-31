@@ -48,6 +48,7 @@ public class EchoServer extends AbstractServer
     String[] parts = ((String)msg).split(" ");
     if (parts[0].equals("#login")) {
       serverUI.display((String) msg);
+      client.setInfo("loginID", ((String)msg).substring(7, ((String)msg).length() - 1));
       sendToAllClients(msg);
     }
     else  {
