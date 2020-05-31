@@ -88,6 +88,7 @@ public class ChatClient extends AbstractClient
         else if(commands[0].equals("#sethost")) {
           if (!isConnected()) {
             setHost(commands[1]);
+            clientUI.display("Host set to: " + getHost());
           }
           else {
             clientUI.display("Could not set host as client is currently connected.");
@@ -96,6 +97,7 @@ public class ChatClient extends AbstractClient
         else if (commands[0].equals("#setport")) {
           if (!isConnected()) {
             setPort(Integer.parseInt(commands[1]));
+            clientUI.display("Port set to: " + getPort());
           }
           else {
             clientUI.display("Could not set port as client is currently connected.");
