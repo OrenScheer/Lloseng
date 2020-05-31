@@ -147,8 +147,7 @@ public class ChatClient extends AbstractClient
    * @param exception The exception thrown when the server does not respond.
    */
   public void connectionException(Exception exception) {
-    clientUI.display("Server has shut down. Terminating client.");
-    quit();
+    clientUI.display("Abnormal termination of connection.");
   }
 
   /**

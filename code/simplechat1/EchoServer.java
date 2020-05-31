@@ -164,7 +164,7 @@ public class EchoServer extends AbstractServer
    * @param client the connection with the client.
    */
   synchronized protected void clientDisconnected(ConnectionToClient client) {
-    serverUI.display("Client at " + client + " has disconnected.");
+    serverUI.display(client.getInfo("loginID") + " has disconnected.");
     client.setInfo("firstMessageReceived", false);
   }
 
