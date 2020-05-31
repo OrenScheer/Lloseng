@@ -58,7 +58,14 @@ public class EchoServer extends AbstractServer
       }
       catch (IOException e) {}
     }
-    else  {
+    else {
+      if (client.getInfo("firstMessageReceived") == null || ((boolean) client.getInfo("firstMessageReceived")) == false) {
+        try {
+          client.sendToClient("No login found. Terminating connection.");
+          client.close();
+        }
+        catch (IOException e) {}
+      }
       serverUI.display("Message received: " + msg + " from " + client);
       sendToAllClients(client.getInfo("loginID") + ": " + msg);
     }
