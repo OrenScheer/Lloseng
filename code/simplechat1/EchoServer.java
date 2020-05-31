@@ -167,6 +167,7 @@ public class EchoServer extends AbstractServer
   synchronized protected void clientDisconnected(ConnectionToClient client) {
     serverUI.display(client.getInfo("loginID") + " has disconnected.");
     client.setInfo("firstMessageReceived", false);
+    sendToAllClients(client.getInfo("loginID") + " has disconnected.");
   }
 
   /**
@@ -181,6 +182,7 @@ public class EchoServer extends AbstractServer
     else {
       serverUI.display(client.getInfo("loginID") + " has unexpectedly disconnected: " + exception);
       client.setInfo("firstMessageReceived", false);
+      sendToAllClients(client.getInfo("loginID") + " has unexpectedly disconnected: " + exception);
     }
   }
 }
