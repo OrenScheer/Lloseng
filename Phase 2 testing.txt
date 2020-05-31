@@ -363,4 +363,3 @@ xubuntuvm@xubuntuvm-VirtualBox:~/Documents/SimpleChat/Lloseng/code/simplechat1$ 
 > VMusername has logged on.
 > username723 has disconnected.
 > Falcon9 has disconnected.
-
