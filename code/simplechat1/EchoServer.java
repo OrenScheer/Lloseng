@@ -46,10 +46,17 @@ public class EchoServer extends AbstractServer
    */
   public void handleMessageFromClient (Object msg, ConnectionToClient client) {
     String[] parts = ((String)msg).split(" ");
-    if (parts[0].equals("#login")) {
+    if (parts[0].equals("#login") && (client.getInfo("firstMessageReceived") == null || ((boolean) client.getInfo("firstMessageReceived")) == false)) {
       serverUI.display((String) msg);
       client.setInfo("loginID", ((String)msg).substring(7, ((String)msg).length() - 1));
+      client.setInfo("firstMessageReceived", true);
       sendToAllClients(msg);
+    }
+    else if (parts[0].equals("#login")) {
+      try {
+        client.sendToClient("Already connected, cannot login again.");
+      }
+      catch (IOException e) {}
     }
     else  {
       serverUI.display("Message received: " + msg + " from " + client);
@@ -148,6 +155,7 @@ public class EchoServer extends AbstractServer
    */
   synchronized protected void clientDisconnected(ConnectionToClient client) {
     serverUI.display("Client at " + client + " has disconnected.");
+    client.setInfo("firstMessageReceived", false);
   }
 
   /**
@@ -157,6 +165,7 @@ public class EchoServer extends AbstractServer
    */
   synchronized protected void clientException(ConnectionToClient client, Throwable exception) {
     serverUI.display("A client has unexpectedly disconnected: " + exception);
+    client.setInfo("firstMessageReceived", false);
   }
 }
 
